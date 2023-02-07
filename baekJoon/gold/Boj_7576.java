@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 
 public class Boj_7576 {
 
-  private static ArrayList<Spot3> spots; // 1이 담긴 좌표들
+  private static ArrayList<Spot4> spots; // 1이 담긴 좌표들
   private static int[][] branch; // 전체 좌표들
   private static boolean[][] visit; // bfs 방문 확인용
   private static int M; // 가로 칸 수
@@ -33,7 +33,7 @@ public class Boj_7576 {
       for (int j = 0; j < M; j++) {
         branch[i][j] = Integer.parseInt(st.nextToken());
         if (branch[i][j] == 1) {
-          spots.add(new Spot3(i, j));
+          spots.add(new Spot4(i, j));
         }
       }
     }
@@ -59,17 +59,17 @@ public class Boj_7576 {
   }
 
   private static void bfs() {
-    Queue<Spot3> queue = new LinkedList<>();
+    Queue<Spot4> queue = new LinkedList<>();
     // 1인 지점을 모두 queue에 add
     for (int i = 0; i < spots.size(); i++) {
-      Spot3 s = spots.get(i);
+      Spot4 s = spots.get(i);
       queue.add(s);
       visit[s.x][s.y] = true;
     }
 
     // bfs 시작
     while (!queue.isEmpty()) {
-      Spot3 s_Poll = queue.poll();
+      Spot4 s_Poll = queue.poll();
       // 상하좌우 탐색
       for (int i = 0; i < 4; i++) {
         int newX = s_Poll.x + moveX[i];
@@ -85,7 +85,7 @@ public class Boj_7576 {
           continue;
         }
 
-        queue.add(new Spot3(newX, newY));
+        queue.add(new Spot4(newX, newY));
         branch[newX][newY] = branch[s_Poll.x][s_Poll.y] + 1;
         visit[newX][newY] = true;
       }
@@ -94,12 +94,12 @@ public class Boj_7576 {
 }
 
 // 좌표용 class
-class Spot {
+class Spot4 {
 
   int x;
   int y;
 
-  Spot(int x, int y) {
+  Spot4(int x, int y) {
     this.x = x;
     this.y = y;
   }
